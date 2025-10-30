@@ -1,23 +1,31 @@
-#  ATM Stimulation Program
-from datetime import datetime
-pin = 7717
-account_balance = 10000
+#                                                ------ ATM Stimulation Program ------  
+from datetime import datetime 
+
+pin = 7717 # establishing the PIN of an ATM
+account_balance = 10000 # Initial balance 
+
 # Ask the user to enter PIN 
 check_pin = int(input('Enter your PIN: '))
+#  checking the given pin is correct or incorrect.
 if pin == check_pin:
     print('Login successful ✅')
 else:
     print('Incorrect pin ❌\nLogin denied!')
     exit()
+
 while True:
     print(f'----- ATM MENU ----- \n1. Check Balance\n2. Deposit Money\n3. Withdraw Money\n4.View Transaction History\n5. Exit')
     user_choice = input('Enter your choice: ')
 
+    # use conditional staement & function to perform the main task.
+
+    # checking Bank Balance 
     if user_choice == '1':
         def check_balance():
             print(f'Current Balance: {account_balance}')
         check_balance()
 
+    # Deposit money through ATM
     elif user_choice == '2':
         def deposit_money():
             global account_balance
@@ -30,6 +38,7 @@ while True:
                 file.write(f'Deposited: Rs{deposit}\nNew Balance: Rs{account_balance}\n')
         deposit_money()
 
+    # Withdrawl money through ATM
     elif user_choice == '3':
         def withdraw_money():
             global account_balance
@@ -41,10 +50,11 @@ while True:
                 with open('transaction.txt','a') as file:
                     file.write(f'Date & Time: {current_time}\n')
                     file.write(f'Withraw Amount: Rs{withdraw}\nRemaining Balance: Rs{account_balance}')
-                    
             else:
                 print( 'Insufficient Balance!')
         withdraw_money()
+
+    # view all transaction hisory and save in another file 
     elif user_choice == '4':
         def view_transaction_history():
             global account_balance
@@ -53,9 +63,11 @@ while True:
                 print(content)
         view_transaction_history() 
 
+    # Exit from the program 
     elif user_choice== '5':
         print('Thanks for taking services from us.')
         break
-
+    
+    # for invalid input or choice 
     else:
         print('Invalid Choice')
